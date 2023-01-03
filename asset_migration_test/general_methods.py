@@ -1,4 +1,4 @@
-from asset_migration.asset import Asset
+from asset_migration_test.asset import Asset
 
 
 class GeneralMethods(Asset):
