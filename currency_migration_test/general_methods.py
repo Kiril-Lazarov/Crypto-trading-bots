@@ -1,4 +1,4 @@
-from asset_migration_test.asset import Asset
+from currency_migration_test.asset import Asset
 
 
 class GeneralMethods(Asset):
@@ -80,7 +80,7 @@ class GeneralMethods(Asset):
     @classmethod
     def normalize_quantities(cls, asset_on_charge, obj_list, prices_dict):
         object1 = GeneralMethods.cycling_objects(obj_list, asset_on_charge)
-        result = '\n--------RENORMING---------\n'
+        result = '\n--------RENORMALIZATION---------\n'
         for object in obj_list:
             if obj_list.index(object) < obj_list.index(object1):
                 object.quantity = GeneralMethods.multiply(object1.quantity,

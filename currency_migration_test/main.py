@@ -3,7 +3,7 @@
     This test crypto bot takes the current price of ten currency pairs every second and decides whether it is
 appropriate to make a transaction. At any given time, the entire trading amount is located in one of the
 currencies, and if the price of the pairs in which this currency participates is appropriate,
-the robot makes transaction. Appropriate means that the new amount should be greater than the previous
+the crypto bot makes transaction. 'Appropriate' means that the new amount should be greater than the previous
 available amount of the respective currency. For example, if there was $100 in a previous transaction, the current
 currency's dollar equivalent must be greater than $100.
 
@@ -46,11 +46,8 @@ trx = Asset(access.multiply(busd.quantity, 1 / prices_dict['TRX/BUSD']), 'TRX')
 obj_list = [trx, xrp, eth, btc, busd]
 asset_on_charge = busd.name
 print('Processing...')
-print(f'Starting TRX: {trx.quantity}')
-print(f'Starting XRP: {xrp.quantity}')
-print(f'Starting ETH: {eth.quantity}')
-print(f'Starting BTC: {btc.quantity}')
-print(f'Starting BUSD: {busd.quantity}')
+for obj in obj_list:
+    print(f'Starting {obj.name}: {obj.quantity}')
 print(access.next_prices(asset_on_charge, {'TRX': trx.quantity, 'XRP': xrp.quantity, 'ETH': eth.quantity,
                                            'BTC': btc.quantity, 'BUSD': busd.quantity}, asset_pairs_list,
                          profit_percentage))
@@ -66,11 +63,8 @@ while True:
         start = time.time()
         print(access.execution_report(previous_asset, asset_on_charge, price, transaction_count))
         print(f'Current active asset: {asset_on_charge}')
-        print(f'TRX: {trx.quantity} Profit: {(trx.quantity / trx.init_qty - 1) * 100:.2f}%')
-        print(f'XRP: {xrp.quantity} Profit: {(xrp.quantity / xrp.init_qty - 1) * 100:.2f}%')
-        print(f'ETH: {eth.quantity} Profit: {(eth.quantity / eth.init_qty - 1) * 100:.2f}%')
-        print(f'BTC: {btc.quantity} Profit: {(btc.quantity / btc.init_qty - 1) * 100:.2f}%')
-        print(f'BUSD: {busd.quantity} Profit: {(busd.quantity / busd.init_qty - 1) * 100:.2f}%')
+        for obj in obj_list:
+            print(f'{obj.name}: {obj.quantity} Profit: {(obj.quantity / obj.init_qty - 1) * 100:.2f}%')
         print(access.next_prices(asset_on_charge, {'TRX': trx.quantity, 'XRP': xrp.quantity, 'ETH': eth.quantity,
                                                    'BTC': btc.quantity, 'BUSD': busd.quantity}, asset_pairs_list,
                                  profit_percentage))
